@@ -1,0 +1,1 @@
+const r=require('express').Router();const c=require('../controllers/postController');const a=require('../middleware/authMiddleware');const upload=require('../middleware/uploadMiddleware');r.get('/',a,c.list);r.get('/:id',a,c.show);r.post('/',a,upload.single('image'),c.create);r.post('/:id/comments',a,c.comment);r.post('/:id/help',a,c.help);module.exports=r;

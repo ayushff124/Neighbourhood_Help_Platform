@@ -1,0 +1,1 @@
+const r=require('express').Router();const c=require('../controllers/messageController');const a=require('../middleware/authMiddleware');r.get('/',a,c.list);r.get('/:id',a,c.thread);r.post('/send',a,c.send);module.exports=r;

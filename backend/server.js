@@ -1,0 +1,5 @@
+require('dotenv').config();const express=require('express');const cors=require('cors');const path=require('path');const connectDB=require('./config/db');
+const app=express();app.use(cors({origin:process.env.CLIENT_URL||'http://localhost:5173'}));app.use(express.json());app.use(express.urlencoded({extended:true}));app.use('/uploads',express.static(path.join(__dirname,'uploads')));
+app.get('/',(_,res)=>res.json({name:'Neighborhood Help API',version:'2.0'}));app.use('/api/auth',require('./routes/authRoutes'));app.use('/api/posts',require('./routes/postRoutes'));app.use('/api/messages',require('./routes/messageRoutes'));app.use('/api/notifications',require('./routes/notificationRoutes'));app.use('/api/chatbot',require('./routes/chatbotRoutes'));
+app.use((err,req,res,next)=>{console.error(err);res.status(500).json({message:err.message||'Server error'});});
+const port=process.env.PORT||5000;connectDB().then(()=>app.listen(port,()=>console.log(`API running on http://localhost:${port}`))).catch(e=>{console.error(e.message);process.exit(1)});

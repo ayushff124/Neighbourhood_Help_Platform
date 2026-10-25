@@ -1,0 +1,1 @@
+const r=require('express').Router();const a=require('../middleware/authMiddleware');const admin=require('../middleware/adminMiddleware');const c=require('../controllers/adminController');const posts=require('../controllers/postController');r.use(a,admin);r.get('/posts',c.posts);r.delete('/posts/:id',posts.remove);module.exports=r;

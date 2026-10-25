@@ -1,0 +1,1 @@
+const r=require('express').Router();const c=require('../controllers/authController');const a=require('../middleware/authMiddleware');r.post('/register',c.register);r.post('/verify-otp',c.verifyOtp);r.post('/resend-otp',c.resendOtp);r.post('/login',c.login);r.post('/google',c.googleLogin);r.get('/me',a,c.me);module.exports=r;

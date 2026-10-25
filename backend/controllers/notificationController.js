@@ -1,0 +1,1 @@
+const Notification=require('../models/Notification'); exports.list=async(req,res)=>res.json({notifications:await Notification.find({user:req.user._id}).sort({createdAt:-1}).limit(50).populate('actor','name').populate('post','title')}); exports.read=async(req,res)=>{await Notification.findOneAndUpdate({_id:req.params.id,user:req.user._id},{isRead:true});res.json({ok:true});};
